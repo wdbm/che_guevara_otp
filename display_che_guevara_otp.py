@@ -43,57 +43,21 @@ options:
     --secrets=FILEPATH  filepath of secrets  [default: ~/.secrets]
 """
 
-import datetime
 import docopt
 import os
-import sys
-import time
 
 import che_guevara_otp
 
 name    = "display_che_guevara_otp"
-version = "2018-01-07T2354Z"
+version = "2018-01-15T1652Z"
 
 def main(options):
 
     filepath_secrets = os.path.expanduser(options["--secrets"])
 
-    if not os.path.isfile(filepath_secrets):
-        print("no secrets file {filepath_secrets} found".format(
-            filepath_secrets = filepath_secrets)
-        )
-        sys.exit()
-
-    secrets = {}
-
-    while True:
-
-        secrets = {}
-
-        for line in open(filepath_secrets):
-            data = line.rstrip("\n").split(":")
-            secrets[data[0].strip()] = data[1].strip()
-
-        os.system("clear")
-
-        for key, value in secrets.items():
-            print(key + "\n" + str(che_guevara_otp.TOTP(secret = value)) + "\n")
-
-        seconds = datetime.datetime.now().second
-
-        while seconds != 0 and seconds != 31:
-
-            seconds = datetime.datetime.now().second
-            sys.stdout.write("\r")
-            if seconds >= 0 and seconds <= 30:
-                seconds_remaining = 30 - seconds
-            else:
-                seconds_remaining = 60 - seconds
-            sys.stdout.write("{seconds_remaining} seconds to change".format(
-                seconds_remaining = str(seconds_remaining).zfill(2)
-            ))
-            sys.stdout.flush()
-            time.sleep(0.5)
+    che_guevara_otp.loop_display_TOTP_passcodes(
+        filepath_secrets = filepath_secrets
+    )
 
 if __name__ == "__main__":
     options = docopt.docopt(__doc__)

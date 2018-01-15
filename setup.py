@@ -9,7 +9,7 @@ def main():
 
     setuptools.setup(
         name             = "che_guevara_otp",
-        version          = "2018.01.07.2354",
+        version          = "2018.01.15.1652",
         description      = "Python OTP",
         long_description = long_description(),
         url              = "https://github.com/wdbm/che_guevara_otp",

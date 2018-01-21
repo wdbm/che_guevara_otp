@@ -45,7 +45,7 @@ import time
 import che_guevara_otp
 
 name    = "che_guevara_otp"
-version = "2018-01-15T1652Z"
+version = "2018-01-21T0149Z"
 
 def HOTP(
     secret        = None, # secret value known to both server and client
@@ -114,7 +114,7 @@ def loop_display_TOTP_passcodes(
         while seconds != 0 and seconds != 31:
             if set_terminal_size:
                 resize_terminal(
-                    width  = len(max(list(secrets.keys()))),
+                    width  = len(max(list(secrets.keys()), key = len)),
                     height = len(secrets) * 3 + 1
                 )
             seconds = datetime.datetime.now().second

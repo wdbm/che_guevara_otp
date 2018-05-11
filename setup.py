@@ -2,39 +2,31 @@
 # -*- coding: utf-8 -*-
 
 import os
-
 import setuptools
 
 def main():
-
     setuptools.setup(
-        name             = "che_guevara_otp",
-        version          = "2018.01.21.0149",
-        description      = "Python OTP",
-        long_description = long_description(),
-        url              = "https://github.com/wdbm/che_guevara_otp",
-        author           = "Will Breaden Madden",
-        author_email     = "wbm@protonmail.ch",
-        license          = "GPLv3",
-        py_modules       = [
-                           "che_guevara_otp"
-                           ],
-        install_requires = [
-                           "docopt"
-                           ],
-        scripts          = [
-                           "display_che_guevara_otp.py"
-                           ],
-        entry_points     = """
-                           [console_scripts]
-                           che_guevara_otp = che_guevara_otp:che_guevara_otp
-                           """
+        name                 = "che_guevara_otp",
+        version              = "2018.05.11.1653",
+        description          = "Python OTP",
+        long_description     = long_description(),
+        url                  = "https://github.com/wdbm/che_guevara_otp",
+        author               = "Will Breaden Madden",
+        author_email         = "wbm@protonmail.ch",
+        license              = "GPLv3",
+        packages             = setuptools.find_packages(),
+        entry_points         = {
+                               "console_scripts": (
+                                  "che_guevara_otp=che_guevara_otp.__init__:loop_display_TOTP_passcodes"
+                               )
+                               },
+        include_package_data = True,
+        zip_safe             = False
     )
 
 def long_description(
     filename = "README.md"
     ):
-
     if os.path.isfile(os.path.expandvars(filename)):
         try:
             import pypandoc

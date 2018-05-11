@@ -12,6 +12,14 @@ The counter-based passcodes are hash-based one-time passcodes (HOTP) and are def
 pip install che_guevara_otp
 ```
 
+To set up a launcher for the `che_guevara_otp` command, copy `Che.svg` to `/usr/share/icons/hicolor/scalable/apps/` and copy `che_guevara_otp.desktop` to  `/usr/share/applications/`, for example:
+
+```Bash
+sudo cp /usr/local/lib/python3.5/dist-packages/che_guevara_otp-2018.5.11.1653-py3.5.egg/che_guevara_otp/data/Che.svg /usr/share/icons/hicolor/scalable/apps/
+
+sudo cp /usr/local/lib/python3.5/dist-packages/che_guevara_otp-2018.5.11.1653-py3.5.egg/che_guevara_otp/data/che_guevara_otp.desktop /usr/share/applications/
+```
+
 # module
 
 HOTP passcodes can be generated in a way like the following:
@@ -36,13 +44,17 @@ TOTP passcodes can be generated in a way like the following, where the default t
 826402
 ```
 
-# display_che_guevara_otp.py
+# che_guevara_otp terminal loop display
 
-![](https://raw.githubusercontent.com/wdbm/che_guevara_otp/master/display_che_guevara_otp.png)
+![](https://raw.githubusercontent.com/wdbm/che_guevara_otp/master/che_guevara_otp.png)
 
-The script `display_che_guevara_otp.py` displays time-based one-time passcodes at 30 second intervals based on secrets stored in a specified file. The file is unencrypted plaintext so userspace encryption combined with other security is assumed. The contents of the secrets file should be of the following form:
+The command `che_guevara_otp` displays time-based one-time passcodes at 30 second intervals based on secrets stored in a specified file `~/.secrets`. The file is unencrypted plaintext so userspace encryption combined with other security is assumed. The contents of the secrets file should be of the following form:
 
 ```
 OmegaBay:         XXXXXXXXXXXXXXXXXXXXXXXX
 Missile Emporium: YYYYYYYYYYYYYYYYYYYYYYYY
 ```
+
+# future
+
+Under consideration are functions to install the launcher and icon infrastructure based on Python version information.
